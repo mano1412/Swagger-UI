@@ -1,0 +1,201 @@
+{
+  "swaggerDefinition":{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Profile Executer",
+      "description": "Profile Executer APIs ",
+      "contact": {},
+      "version": "1.0"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3000/",
+        "description": "local server"
+      }
+    ],
+    "paths": {
+      "/getProfile": {
+        "get": {
+          "tags": ["Profile Management"],
+          "summary": "Get Profile Details",
+          "description": "Provide AccessToken Below",
+          "operationId": "getProfile",
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "in": "header",
+              "description": "",
+              "style": "simple",
+              "schema": {
+                "type": "string",
+                "enum": ["application/json"]
+              }
+            },
+            {
+              "name": "accessToken",
+              "in": "header",
+              "required": true,
+              "description": "",
+              "style": "simple",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "content": {
+                "application/json": {
+                  "example": {
+                    "id":1,
+                    "firstName":"manoranjan",
+                    "lastName":"otta",
+                    "accessToken": "mano_1042",
+                    "status": "successfully signed Up! Hit the access-token in get profile to fetch"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/signUp": {
+        "post": {
+          "tags": ["Profile Management"],
+          "summary": "Sign Up Profile",
+          "description": "Sign Up Profile APIS",
+          "operationId": "signUp",
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "in": "header",
+              "description": "",
+              "required": true,
+              "style": "simple",
+              "schema": {
+                "type": "string",
+                "enum": ["application/json"]
+              }
+            }
+          ],
+          "requestBody": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                    "id":1,
+                    "firstName":"manoranjan",
+                    "lastName":"otta"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Get the response based on scenarios appears below example schema",
+              "content": {
+                "application/json": {
+                  "example": {
+                        "id": 1,
+                        "firstName": "manoranjan",
+                        "lastName": "otta",
+                        "accessToken": "mano_1042",
+                        "status": "successfully signed Up! Hit the access-token in get profile to fetch"
+                  },
+                  "schema": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/clearData": {
+        "delete": {
+          "tags": ["Profile Management"],
+          "summary": "Delete Profile",
+          "description": "Delete Profile APIS",
+          "operationId": "delete",
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "in": "header",
+              "description": "",
+              "required": true,
+              "style": "simple",
+              "schema": {
+                "type": "string",
+                "enum": ["application/json"]
+              }
+            },
+            {
+              "name": "accessToken",
+              "in": "header",
+              "required": true,
+              "description": "",
+              "style": "simple",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Get the response based on scenarios appears below example schema",
+              "content": {
+                "application/json": {
+                  "example": {
+                    "message":"Datas has been cleared!! pls signUp"
+                  },
+                  "schema": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "securitySchemes": {
+        "AccessTokenAuth": {
+          "type": "apiKey",
+          "in": "header",
+          "name": "accesstoken"
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "signUp Profile": {
+          "title": "signUp",
+          "required": ["lastName","id"],
+          "type": "object",
+          "properties": {
+            "id":{"type":"Number"},
+            "firstName":{"type":"string"},
+            "lastName":{"type":"string"}
+          },
+          "example": {
+           "id":1,
+           "firstName":"manoranjan",
+           "lastName":"otta"
+          }
+        }
+      }
+
+      },
+    "security": [
+      {
+        "AccessTokenAuth": []
+      }
+    ]
+  }
+  
+}
